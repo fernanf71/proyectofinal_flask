@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>  <!---esta parte quiero que sea dinámica y en función de la página que estoy, muestre el título-->
+    <style>
+        *{
+            font-family: 'Roboto', sans-serif;
+        }
+        header{
+            color: white;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>myCRYPTO</p>
+    </header>
+    <!---
+    <h1>Lista de movimientos</h1>
+    <p>{{miTexto}}</p>  miTexto toma el valor que tiene en views.py en render_template-->
+    <section>  <!---section es la parte que va a ir cambiando en mi aplicación-->
+        {% block content %}{% endblock %}
+    </section>
+
+    <footer>
+        &copy; 2020 - Todos los derechos reservados  <!---buscar en internet 'HTML entities' (https://dev.w3.org/html5/html-author/charref)-->
+    </footer>
+    
+    
+</body>
+</html>

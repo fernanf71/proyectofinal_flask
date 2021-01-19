@@ -1,0 +1,38 @@
+{% extends 'base.html' %}  <!---esto es como si fuera un import-->
+
+{% block title %}Movimientos{% endblock %}
+
+{% block content %}
+        <h1>Movimientos</h1>
+        <form action="purchase">
+             <input type="submit" value="+"> <!---    #la única manera de meterle un boton a un formulario y que me redireccione (sin meterle javascript) es con un formulario.-->
+       
+        </form>
+        <table>
+             <tr>
+                     <th>Fecha</th>
+                     <th>Hora</th>
+                     <th>From</th>
+                     <th>Q</th>
+                     <th>To</th>
+                     <th>Q</th>
+                     <th>P.U</th>
+             </tr>
+             {% for registro in datos %}
+             <tr>
+                <td>{{ registro[0] }}</td>
+                <td>{{ registro[1] }}</td>
+                <td>{{ registro[2] }}</td>
+                <td>{{ registro[3] }}</td>
+                <td>{{ registro[4] }}</td>
+                <td>{{ registro[5] }}</td>
+                <td>{{ registro[6] }}€</td>
+             </tr>
+             {% endfor %}
+             <tr>
+                <td colspan="3">Total: {{total}}€</td>
+             </tr>
+
+        </table>
+{% endblock %}
+

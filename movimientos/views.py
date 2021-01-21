@@ -1,5 +1,5 @@
 from movimientos import app  # estoy importando el app del fichero __init__.py
-from flask import render_template
+from flask import render_template, request
 import csv
 
 
@@ -17,9 +17,13 @@ def Movimientos():
 
     #la única manera de meterle un boton a un formulario y que me redireccione (sin meterle javascript) es con un formulario.
 
-@app.route('/purchase')
+@app.route('/purchase', methods=['GET', 'POST'])
 def compra():
-    return 'Me he quedado aquí  '
+    if request.method == 'POST': # si es un GET no hace nada. Devuelve el template vacío, es decir, se va al return. Si es POST, puesto lo que se inidca debajo del IF
+        print(request.form) # esto es un diccionario con las duplas de los datos completados en el formulario. Para pedirle solo la fecha le pones request.form('fecha'); pero lo que viaja es una cadena. Si está viajando un número lo tienes que convertir en un FLOAT
+
+
+    return render_template('compra.html')
 
 
 

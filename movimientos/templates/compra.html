@@ -3,37 +3,39 @@
 {% block title %}COMPRA DE CRIPTOS{% endblock %}
 {% block content %}
 <form action ='purchase' method='post'> <!---en action hay que poner el punto de entrada - el endpoint. No le pongo la raya '/' a purchase pq estamos en enrutamiento relativo --->
+    <div>
+       
+    </div>    
     <div>    
     <label for='From'>From:</label>
         <select name='From'> <!---me pinta un menú de selección. El 'name' es para distinguir unos inputs de otros, si tengo varios. En google poner html type y buscar todos los tipos de type que existen-->
-            <option value='con1'>COIN1</option>
-            <option value='con2'>COIN2</option>
-            <option value='coin3'>COIN3</option>
-            <option value='coin4'>COIN4</option>
+            <option value="{{listamonedas[0]}}" selected>{{listamonedas[0]}}</option>
+            {% for moneda in listamonedas[1:] %}
+                <option value="{{moneda}}" selected>{{moneda}}</option>
+            {% endfor %}
         </select>
     </div>
     <div>
         <label for='To'>To:</label>
         <select name='To'>
-            <option value='coin5'>COIN5</option>
-            <option value='coin6'>COIN6</option>
-            <option value='coin7'>COIN7</option>
-            <option value='coin8'>COIN8</option>
+            <option value="{{listamonedas[0]}}" selected>{{listamonedas[0]}}</option>
+            {% for moneda in listamonedas[1:] %}
+            <option value="{{moneda}}" selected>{{moneda}}</option>
+            {% endfor %}
         </select>
     </div>
     <div>
-        <label for='Q1'>Q:</label>
-        <input type='number' name='Q1'> <!---si quieres poner que un campo sea obligatorio tienes que poner required-->
-        <i class="fas fa-calculator"></i>
+        {{ form.q1.label }}
+        {{ form.q1(placeholder='Introduzca cantidad')}}
     </div>
     <div>   
-        <label for='Q2'>Q:</label>
-        <input type='number' name='Q2'step='0.01'> <!---el step es para poder poner decimales-->
+        {{ form.q2.label }}
+        {{ form.q2(placeholder='Introduzca cantidad')}}
 
     </div>
     <div>
-        <label for='PU'>P.U:</label>
-        <input type='number' name='PU' step='0.01'>
+        <label for='pu'>P.U:</label>
+        <input type='number' name='pu' step='0.01'>
     </div>    
     <div>
         <input type="submit" value="+" step='0.01'>

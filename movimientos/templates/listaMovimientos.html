@@ -4,10 +4,9 @@
 
 {% block content %}
         <h1>Movimientos</h1>
-        <form action="purchase">
-             <input type="submit" value="+"> <!---    #la única manera de meterle un boton a un formulario y que me redireccione (sin meterle javascript) es con un formulario.-->
-       
-        </form>
+        <div id="boton-plus">
+                <button><a href="purchase"><i class="fas fa-plus"></i></a></button>
+            </div>       
         <table>
              <tr>
                      <th>Fecha</th>
@@ -16,23 +15,21 @@
                      <th>Q</th>
                      <th>To</th>
                      <th>Q</th>
-                     <th>P.U</th>
+                     <th>P.U</th>  
              </tr>
              {% for registro in datos %}
-             <tr>
-                <td>{{ registro[0] }}</td>
-                <td>{{ registro[1] }}</td>
-                <td>{{ registro[2] }}</td>
-                <td>{{ registro[3] }}</td>
-                <td>{{ registro[4] }}</td>
-                <td>{{ registro[5] }}</td>
-                <td>{{ registro[6] }}€</td>
-             </tr>
+                <tr>
+                        <td>{{ registro ['fecha'] }}</td>
+                        <td>{{ registro ['hora'] }}</td>
+                        <td>{{ registro ['desde'] }}</td>
+                        <td>{{ registro ['q1'] }}</td>
+                        <td>{{ registro ['hacia'] }}</td>
+                        <td>{{ registro ['q2'] }}</td>
+                        <td>{{ registro ['pu'] }}€</td>
+                </tr>
              {% endfor %}
-             <tr>
-                <td colspan="3">Total: {{total}}€</td>
-             </tr>
-
+        
         </table>
+
 {% endblock %}
 

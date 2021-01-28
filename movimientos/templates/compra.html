@@ -3,26 +3,20 @@
 {% block title %}COMPRA DE CRIPTOS{% endblock %}
 {% block content %}
 <form action ='purchase' method='post'> <!---en action hay que poner el punto de entrada - el endpoint. No le pongo la raya '/' a purchase pq estamos en enrutamiento relativo --->
+    {{ form.hidden_tag() }}
     <div>
        
     </div>    
     <div>    
-    <label for='From'>From:</label>
-        <select name='From'> <!---me pinta un menú de selección. El 'name' es para distinguir unos inputs de otros, si tengo varios. En google poner html type y buscar todos los tipos de type que existen-->
-            <option value="{{listamonedas[0]}}" selected>{{listamonedas[0]}}</option>
-            {% for moneda in listamonedas[1:] %}
-                <option value="{{moneda}}" selected>{{moneda}}</option>
-            {% endfor %}
-        </select>
+        <!---me pinta un menú de selección. El 'name' es para distinguir unos inputs de otros, si tengo varios. En google poner html type y buscar todos los tipos de type que existen-->
+             {{ form.desde() }}  
+        
     </div>
+ 
     <div>
-        <label for='To'>To:</label>
-        <select name='To'>
-            <option value="{{listamonedas[0]}}" selected>{{listamonedas[0]}}</option>
-            {% for moneda in listamonedas[1:] %}
-            <option value="{{moneda}}" selected>{{moneda}}</option>
-            {% endfor %}
-        </select>
+        
+            {{ form.hacia() }}    
+        
     </div>
     <div>
         {{ form.q1.label }}
@@ -34,16 +28,15 @@
 
     </div>
     <div>
-        <label for='pu'>P.U:</label>
-        <input type='number' name='pu' step='0.01'>
+        {{ form.pu(placeholder='Introduzca cantidad')}}
     </div>    
     <div>
-        <input type="submit" value="+" step='0.01'>
+        {{ form.aceptar (class = "Aceptar") }}
     </div>
     <div>
-        <input type="submit" value="x" step='0.01'>
+        {{ form.cancelar (class = "Cancelar") }}
     </div>
-
+--->
     </form>
 
 {% endblock %}

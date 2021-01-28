@@ -3,45 +3,15 @@ from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 
-class Crypto:
+api_key = app.config[API_KEY]
 
-    def get_top_5(self):
+def exchange(self):
 
-        url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
-        parameters = {
-          'start':'1',
-          'limit':'5',
-          'convert':'USD'
-        }
-        headers = {
-          'Accepts': 'application/json',
-          'X-CMC_PRO_API_KEY': 'e3543c4a-2915-4aa8-805a-2b7f47213f26',
-        }
+    url = 'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount={desde}&symbol=BTC&convert={hacia}}&CMC_PRO_API_KEY={api_key}}'
+    
+    respuesta = request.get(url)
 
-        session = Session()
-        session.headers.update(headers)
-
-        response = session.get(url, params=parameters)
-        data = json.loads(response.text)
-        return data['data']
-
-    def get_top_10(self):
-
-        url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
-        parameters = {
-          'start':'1',
-          'limit':'10',
-          'convert':'USD'
-        }
-        headers = {
-          'Accepts': 'application/json',
-          'X-CMC_PRO_API_KEY': 'e3543c4a-2915-4aa8-805a-2b7f47213f26',
-        }
-
-        session = Session()
-        session.headers.update(headers)
-
-        response = session.get(url, params=parameters)
-        data = json.loads(response.text)
-        return data['data']
-'''
+    if respuesta.status == 200:
+      print(repuesta.text)
+    else:
+      print('se ha producido un error', respuesta.status)

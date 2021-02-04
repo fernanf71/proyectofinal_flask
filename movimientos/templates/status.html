@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main class="navbar">
+        <nav>
+            <ul> 
+                <li class="item"><a href="/">Movimientos</a></li>
+                <li class="item"><a href="/purchase">Compra</a></li>
+                <li class="item"><a>Status</a></li>
+            </ul>
+        </nav>
+{% block title %}STATUS{% endblock %}
+<title>ESTADO DE LA INVERSIÓN</title>
+
+<div id="boton-plus">
+        <button><a href="/"><i class="fas fa-plus"></i></a></button>
+<div>
+{{ form.invertido.label }}
+{{ form.invertido }}
+</div>
+<div>
+{{ form.valorActual.label }}
+{{ form.valorActual }}
+</div>
+        
+{% endblock %}

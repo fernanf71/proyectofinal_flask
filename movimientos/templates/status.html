@@ -11,6 +11,9 @@
             </ul>
         </nav>
 {% block title %}STATUS{% endblock %}
+{% for mensaje in mensajes %}
+        <p>{{mensaje}}</p>
+{% endfor %}
 <title>ESTADO DE LA INVERSIÓN</title>
 
 <div id="boton-plus">

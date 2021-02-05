@@ -14,6 +14,10 @@
         </ul>
     </nav>
 
+{% for mensaje in mensajes %}
+        <p>{{mensaje}}</p>
+{% endfor %}
+
 <form action ='purchase' method='post'> <!---en action hay que poner el punto de entrada - el endpoint. No le pongo la raya '/' a purchase pq estamos en enrutamiento relativo --->
     {{ form.hidden_tag() }}
 
@@ -25,16 +29,22 @@
     </div>
     <div>
         {{ form.hacia.label }}
-        {{ form.hacia() }}        
+        {{ form.hacia() }}
+        {% for error in form.hacia.errors %}
+        <p>{{error}}</p>
+        {% endfor %}
+     
     </div>
     <div>
         {{ form.q1.label }}
         {{ form.q1(placeholder='Introduzca cantidad')}}
-        {{msg}}
+        {% for error in form.q1.errors %}
+        <p>{{error}}</p>
+        {% endfor %}
     </div>
     <div>   
         {{ form.q2.label }}        
-        {{ form.q2(placeholder='Introduzca cantidad')}}
+        {{ form.q2(placeholder='Importe a invertir', disabled="disabled")}}
     </div>
     <div>
         {{ form.pu.label }}
@@ -52,28 +62,27 @@
 {% else %}
 
     <div>    
-        <!---me pinta un menú de selección. El 'name' es para distinguir unos inputs de otros, si tengo varios. En google poner html type y buscar todos los tipos de type que existen-->
-        {{ form.desde() }}  
-        
+        {{ form.desde.label }}  
+        {{ form.desde(value=form.desde.data, disabled="disabled") }}
     </div>
-
     <div>
-        
-        {{ form.hacia() }}    
-        
+        {{ form.hacia.label }}
+        {{ form.hacia(value=form.hacia.data, disabled="disabled") }}
+        {{ form.hacia(value=form.hacia.data, hidden=True) }}
+
     </div>
     <div>
         {{ form.q1.label }}
-        {{ form.q1(value=form.q1.data)}}
+        {{ form.q1(value=form.q1.data, readonly="readonly")}}
     </div>
     <div>   
         {{ form.q2.label }}        
-        {{ form.q2(value=form.q2.data)}}
+        {{ form.q2(vavalue=form.q2.data, readonly="readonly")}}
 
     </div>
     <div>
         {{ form.pu.label }}
-        {{ form.pu(value=form.pu.data)}}
+        {{ form.pu(value=form.pu.data, readonly="readonly")}}
     </div>    
     <div>
         {{ form.aceptar (class = "Aceptar") }}

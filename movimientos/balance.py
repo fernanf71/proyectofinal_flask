@@ -24,7 +24,7 @@ def consulta(query, params=()):
         listaDeDiccionarios.append(d)
     return listaDeDiccionarios
 
-datos = consulta('SELECT desde, q1, hacia, q2 FROM MOVIMIENTOS;')
+datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
 def balance(listaMoneda):
     q1 = 0
     q2 = 0
@@ -50,7 +50,7 @@ def seleccionDesde():
     listaMonedas.insert(0, 'EUR')
     return listaMonedas
 
-def pepito():
+def saldoEuros():
     EURSaldo = 0
     for dato in datos:
         if dato['hacia'] == 'EUR':

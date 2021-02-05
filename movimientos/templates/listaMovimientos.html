@@ -10,7 +10,9 @@
                 <li class="item"><a href="/status">Status</a></li>
         </ul>
 </nav>
-
+{% for mensaje in mensajes %}
+        <p>{{mensaje}}</p>
+{% endfor %}
 <h1>Movimientos</h1>
         <div id="boton-plus">
                 <button><a href="/purchase"><i class="fas fa-plus"></i></a></button>

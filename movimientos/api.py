@@ -19,9 +19,6 @@ def exchange(desde, q1, hacia):
     precioTotal = datos['data']['quote'][hacia]['price']
     return precioTotal
 
-  else:
-    print('se ha producido un error', respuesta.status_code)
-
 def EURexchange():
   
   saldoMonedas = valorActual()

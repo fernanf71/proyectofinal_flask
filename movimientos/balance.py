@@ -24,7 +24,7 @@ def consulta(query, params=()):
         listaDeDiccionarios.append(d)
     return listaDeDiccionarios
 
-datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
+
 def balance(listaMoneda):
     q1 = 0
     q2 = 0
@@ -36,6 +36,7 @@ def balance(listaMoneda):
     balance = q2 - q1
     return balance
 
+datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
 def seleccionDesde():
     listaMonedas = ['BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'BNB', 'USDT', 'EOS', 'BSV', 'XLM', 'ADA', 'TRX']
     monedas = {}

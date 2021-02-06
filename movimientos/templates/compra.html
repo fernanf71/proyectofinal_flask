@@ -33,7 +33,7 @@
         {% for error in form.hacia.errors %}
         <p>{{error}}</p>
         {% endfor %}
-     
+
     </div>
     <div>
         {{ form.q1.label }}
@@ -48,10 +48,10 @@
     </div>
     <div>
         {{ form.pu.label }}
-        {{ form.pu }}
+        {{ form.pu(disabled="disabled") }}
     </div>    
     <div>
-        {{ form.aceptar (class = "Aceptar") }}
+        {{ form.aceptar (disabled="disabled", class="acept")}}
     </div>
     <div>
         {{ form.cancelar (class = "Cancelar") }}
@@ -64,11 +64,15 @@
     <div>    
         {{ form.desde.label }}  
         {{ form.desde(value=form.desde.data, disabled="disabled") }}
+        {{ form.desde(value=form.desde.data, hidden=True) }}
     </div>
     <div>
         {{ form.hacia.label }}
         {{ form.hacia(value=form.hacia.data, disabled="disabled") }}
         {{ form.hacia(value=form.hacia.data, hidden=True) }}
+        {% for error in form.hacia.errors %}
+        <p>{{error}}</p>
+        {% endfor %}
 
     </div>
     <div>

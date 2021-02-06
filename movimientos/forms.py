@@ -11,9 +11,9 @@ listaMonedas = ['EUR', 'BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'BNB', 'USDT', 'EOS', 
 
 def disponibilidadMonedas(form, field):
     disponibilidades = valorActual()
-    for disponibilidad in disponibilidades:
+    if form.desde.data != 'EUR':
         if disponibilidades[form.desde.data] < field.data:
-                raise ValidationError('No tiene saldo suficiente')
+            raise ValidationError('No tiene saldo suficiente')
 
 def mismaMoneda(form, field):
     if form.desde.data == field.data:
@@ -22,7 +22,7 @@ def mismaMoneda(form, field):
 
 class MovimientosForm(FlaskForm):
     desde = SelectField('From', choices=listaMonedas)
-    hacia = SelectField('To', choices=listaMonedas, validators=[DataRequired(), mismaMoneda])
+    hacia = SelectField('To', choices=listaMonedas, validators=[DataRequired(), mismaMoneda ])
     q1 = FloatField('Q', validators=[DataRequired(), disponibilidadMonedas ])
     q2 = FloatField('Q')
     pu = FloatField('P.U.')

@@ -40,26 +40,22 @@ def compra():
         mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
         return render_template('compra.html', form=form)
         
-    if request.method == 'POST': # si es un GET no hace nada. Devuelve el template vacío, es decir, se va al return. Si es POST, puesto lo que se inidca debajo del IF
-        # INSERT INTO movimientos (fecha, hora
-        # , desde, q1, hacia, q2, pu) VALUES ("05-05-2019", "12:09", "EUR", 25000, "BTC", 3456, 36);
+    if request.method == 'POST' and form.validate():
         
         if form.calc.data == True:
-            interruptor = True
                 
             try:
                 peticion = exchange(form.desde.data, form.q1.data, form.hacia.data)
             except Exception as e:
                 print("**ERROR**: Error llamada API -compra_API: {} {}". format(type(e).__name__, e))
                 mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
-                return render_template('compra.html', form=form, interruptor=True, mensajes=mensajes)
+                return render_template('compra.html', form=form, interruptor=False, mensajes=mensajes)
 
-            unitPrice = round(peticion/form.q1.data, 8)
-
-
+            
             form.q2.data = peticion
-            form.pu.data = unitPrice
 
+            form.pu.data = round(form.q1.data/form.q2.data, 8)
+            
             return render_template('compra.html', form=form, interruptor=True, mensajes=[])
 
         elif form.aceptar.data == True:
@@ -81,7 +77,7 @@ def compra():
                 print("**ERROR**: Acceso a la base de datos -insert: {} {}". format(type(e).__name__, e))
                 mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
                 return render_template('compra.html', form=form, mensajes=mensajes)
-
+    
     return render_template('compra.html', form=form, interruptor=interruptor, mensajes=mensajes)
 
 @app.route('/status')

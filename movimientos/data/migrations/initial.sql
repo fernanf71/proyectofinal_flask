@@ -1,0 +1,11 @@
+CREATE TABLE "movimientos" (
+	"id"	INTEGER,
+	"fecha"	TEXT NOT NULL,
+	"hora"	TEXT NOT NULL,
+	"desde"	TEXT NOT NULL,
+	"q1"	REAL NOT NULL,
+	"hacia"	TEXT NOT NULL,
+	"q2"	REAL NOT NULL,
+	"pu"	REAL NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)

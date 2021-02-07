@@ -5,6 +5,7 @@
 
 {% block content %}
 
+<div>
 <main class="navbar">
     <nav>
         <ul> 
@@ -13,45 +14,60 @@
             <li class="item"><a href="/status">Status</a></li>
         </ul>
     </nav>
-
-{% for mensaje in mensajes %}
-        <p>{{mensaje}}</p>
-{% endfor %}
-
-<form action ='purchase' method='post'> <!---en action hay que poner el punto de entrada - el endpoint. No le pongo la raya '/' a purchase pq estamos en enrutamiento relativo --->
-    {{ form.hidden_tag() }}
+</div>
+<form action ='purchase' method='post'>
+{{ form.hidden_tag() }}
 
 {% if interruptor == False  %}
-    <div>    
-        <!---me pinta un menú de selección. El 'name' es para distinguir unos inputs de otros, si tengo varios. En google poner html type y buscar todos los tipos de type que existen-->
+    {% for mensaje in mensajes %}
+        <p class="err-msg">
+            {{mensaje}}
+        </p>
+    {% endfor %}
+    <table>
+    <div>
+        <tr>
         {{ form.desde.label }}
-        {{ form.desde() }}  
+        {{ form.desde() }}
+        </tr>
     </div>
     <div>
+        {% for error in form.hacia.errors %}
+        <p class="err-msg">
+            {{error}}        
+        </p>
+        {% endfor %}
+        <tr>
         {{ form.hacia.label }}
         {{ form.hacia() }}
-        {% for error in form.hacia.errors %}
-        <p>{{error}}</p>
-        {% endfor %}
-
+        </tr>
     </div>
     <div>
+        {% for error in form.q1.errors %}
+        <p class="err-msg">
+            {{error}}
+        </p>
+        {% endfor %}
+        <tr>
         {{ form.q1.label }}
         {{ form.q1(placeholder='Introduzca cantidad')}}
-        {% for error in form.q1.errors %}
-        <p>{{error}}</p>
-        {% endfor %}
+        </tr>
     </div>
-    <div>   
+    <div>
+        <tr>
         {{ form.q2.label }}        
         {{ form.q2(placeholder='Importe a invertir', disabled="disabled")}}
+        </tr>
     </div>
     <div>
+        <tr>
         {{ form.pu.label }}
         {{ form.pu(disabled="disabled") }}
+        </tr>
+    </table>
     </div>    
     <div>
-        {{ form.aceptar (disabled="disabled", class="acept")}}
+        {{ form.aceptar (disabled="disabled", class="aceptar")}}
     </div>
     <div>
         {{ form.cancelar (class = "Cancelar") }}
@@ -59,34 +75,45 @@
     <div>
         {{ form.calc (class = "Calc") }}
     </div>
+    </table>
 {% else %}
-
-    <div>    
+    <table>
+    <div>
+        <tr>
         {{ form.desde.label }}  
         {{ form.desde(value=form.desde.data, disabled="disabled") }}
         {{ form.desde(value=form.desde.data, hidden=True) }}
+        </tr>
     </div>
     <div>
+        {% for error in form.hacia.errors %}
+        <p class="err-msg">
+            {{error}}
+        </p>
+        {% endfor %}
+        <tr>
         {{ form.hacia.label }}
         {{ form.hacia(value=form.hacia.data, disabled="disabled") }}
         {{ form.hacia(value=form.hacia.data, hidden=True) }}
-        {% for error in form.hacia.errors %}
-        <p>{{error}}</p>
-        {% endfor %}
-
+        </tr>
     </div>
     <div>
+        <tr>
         {{ form.q1.label }}
         {{ form.q1(value=form.q1.data, readonly="readonly")}}
-    </div>
-    <div>   
-        {{ form.q2.label }}        
-        {{ form.q2(vavalue=form.q2.data, readonly="readonly")}}
-
+        </tr>
     </div>
     <div>
+        <tr>
+        {{ form.q2.label }}        
+        {{ form.q2(value=form.q2.data, readonly="readonly")}}
+        </tr>
+    </div>
+    <div>
+        <tr>
         {{ form.pu.label }}
         {{ form.pu(value=form.pu.data, readonly="readonly")}}
+        </tr>
     </div>    
     <div>
         {{ form.aceptar (class = "Aceptar") }}
@@ -97,7 +124,7 @@
     <div>
         {{ form.calc (class = "Calc") }}
     </div>
+    </table>
 {% endif %}
 </form>
-
 {% endblock %}

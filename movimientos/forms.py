@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 from datetime import date
-from movimientos.balance import*
+from movimientos.balance import valorActual
 
 
 
@@ -23,9 +23,9 @@ def mismaMoneda(form, field):
 class MovimientosForm(FlaskForm):
     desde = SelectField('From', choices=listaMonedas)
     hacia = SelectField('To', choices=listaMonedas, validators=[DataRequired(), mismaMoneda ])
-    q1 = FloatField('Q', validators=[DataRequired(), disponibilidadMonedas ])
-    q2 = FloatField('Q')
-    pu = FloatField('P.U.')
+    q1 = FloatField('Cantidad From:', validators=[NumberRange(min=0.00000001, max=10000000000, message='La cantidad de ser mayor a cero y menor o igual a 10000000000 '), DataRequired(message='Debe introducir valor numérico'), disponibilidadMonedas ])
+    q2 = FloatField('Cantidad To:')
+    pu = FloatField('Precio unitario')
 
     aceptar = SubmitField('Aceptar')
     cancelar = SubmitField('Cancelar')

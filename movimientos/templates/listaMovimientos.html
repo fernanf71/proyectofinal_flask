@@ -3,6 +3,7 @@
 {% block title %}Movimientos{% endblock %}
 
 {% block content %}
+<div>
 <nav>
         <ul> 
                 <li class="item"><a>Movimientos</a></li>
@@ -10,13 +11,15 @@
                 <li class="item"><a href="/status">Status</a></li>
         </ul>
 </nav>
+</div>
 {% for mensaje in mensajes %}
         <p>{{mensaje}}</p>
 {% endfor %}
 <h1>Movimientos</h1>
         <div id="boton-plus">
                 <button><a href="/purchase"><i class="fas fa-plus"></i></a></button>
-        </div>       
+        </div>
+        {% if datos|length > 0 %}
         <table>
                 <tr>
                 <th>Fecha</th>
@@ -39,5 +42,8 @@
         </tr>
         {% endfor %}        
         </table>
+        {% else %}
+        <p>No hay movimientos. Crea el tuyo</p>
+{% endif %}        
 {% endblock %}
 

@@ -2,7 +2,7 @@ venv/
 __pycache__/
 .env/
 .vscode/
-.movimientos/__pycache__/
-.movimientos/basededatos.csv/
-.movimientos/basededatos.db/
+movimientos/__pycache__/
+movimientos/basededatos.csv/
+movimientos/basededatos.db/
 config.py

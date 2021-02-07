@@ -38,7 +38,7 @@ def compra():
     except Exception as e:
         print("**ERROR**: Acceso a la base de datos -compra cryptos: {} {}". format(type(e).__name__, e))
         mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
-        return render_template('compra.html', form=form)
+        return render_template('compra.html', form=form, interruptor=False, mensajes=mensajes)
         
     if request.method == 'POST' and form.validate():
         
@@ -46,16 +46,14 @@ def compra():
                 
             try:
                 peticion = exchange(form.desde.data, form.q1.data, form.hacia.data)
+                form.q2.data = peticion
+                form.pu.data = round(form.q1.data/form.q2.data, 8)
+
             except Exception as e:
                 print("**ERROR**: Error llamada API -compra_API: {} {}". format(type(e).__name__, e))
-                mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
+                mensajes.append('Error en acceso a API. Consulte con el administrador')
                 return render_template('compra.html', form=form, interruptor=False, mensajes=mensajes)
 
-            
-            form.q2.data = peticion
-
-            form.pu.data = round(form.q1.data/form.q2.data, 8)
-            
             return render_template('compra.html', form=form, interruptor=True, mensajes=[])
 
         elif form.aceptar.data == True:
@@ -82,21 +80,36 @@ def compra():
 
 @app.route('/status')
 def status():
+    interruptorError = False
     mensajes= []
     form = Status()
-
-    try:
-
-        saldoEuros =saldoEuros()
-        totalEuros =eurosInvertidos()
-        valorActual = EURexchange()
-
+    try:    
+        saldoMonedas = valorActual()
     except Exception as e:
-        print("**ERROR**: Acceso a la base de datos -status: {} {}". format(type(e).__name__, e))
+        print("**ERROR**: Acceso a la base de datos -insert: {} {}". format(type(e).__name__, e))
         mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
         return render_template('status.html', form=form, mensajes=mensajes)
 
-    form.invertido.data = totalEuros
-    form.valorActual.data = totalEuros + saldoEuros + valorActual
+    valorActualEur = 0
+    for desde in saldoMonedas:
+        q1 = saldoMonedas[desde]
+        
+        try:
+            valorActualEur += exchange(desde, q1, 'EUR')
 
-    return render_template('status.html', form=form, mensajes=mensajes)
+        except Exception as e:
+                print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
+                mensajes.append('Error en acceso a la API. Consulte con el administrador')
+                return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
+        try:    
+            saldoEur =saldoEuros()
+            totalEuros =eurosInvertidos()
+            
+        except Exception as e:
+                print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
+                mensajes.append('Error en acceso a la API. Consulte con el administrador')
+                return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
+
+    form.invertido.data = totalEuros
+    form.valorActual.data = totalEuros + saldoEur + valorActualEur
+    return render_template('status.html', mensajes=mensajes, form=form, interruptorError=interruptorError)

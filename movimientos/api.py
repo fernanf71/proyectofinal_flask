@@ -19,6 +19,8 @@ def exchange(desde, q1, hacia):
     precioTotal = datos['data']['quote'][hacia]['price']
     return precioTotal
 
+
+'''
 def EURexchange():
   
   saldoMonedas = valorActual()
@@ -34,6 +36,5 @@ def EURexchange():
     if respuesta.status_code == 200:
       datos = respuesta.json() # es un metodo del objeto respuesta
       valorActualEuros  += datos['data']['quote'][hacia]['price']
-
   return valorActualEuros
-  
+  '''

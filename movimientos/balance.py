@@ -28,6 +28,7 @@ def consulta(query, params=()):
 def balance(listaMoneda):
     q1 = 0
     q2 = 0
+    datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
     for dato in datos:
         if dato['hacia'] == listaMoneda:
             q2 += float(dato['q2'])
@@ -36,11 +37,9 @@ def balance(listaMoneda):
     balance = q2 - q1
     return balance
 
-datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
 def seleccionDesde():
     listaMonedas = ['BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'BNB', 'USDT', 'EOS', 'BSV', 'XLM', 'ADA', 'TRX']
     monedas = {}
-
     for listaMoneda in listaMonedas:
         monedas[listaMoneda] = balance(listaMoneda)
 
@@ -52,6 +51,7 @@ def seleccionDesde():
     return listaMonedas
 
 def saldoEuros():
+    datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
     EURSaldo = 0
     for dato in datos:
         if dato['hacia'] == 'EUR':
@@ -61,6 +61,7 @@ def saldoEuros():
     return EURSaldo
 
 def eurosInvertidos():
+    datos = consulta('SELECT desde, q1, hacia, q2 FROM movimientos;')
     EURInvertidos = 0
     for dato in datos:
         if dato['desde'] == 'EUR':
@@ -72,9 +73,9 @@ def valorActual():
     monedasSaldo = {}
 
     for moneda in listaMonedas:
-        monedasSaldo[moneda] = balance(moneda)
+        if balance(moneda) > 0:
+            monedasSaldo[moneda] = balance(moneda)
     return monedasSaldo
-
 
 
 

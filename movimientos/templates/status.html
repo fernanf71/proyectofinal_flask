@@ -4,27 +4,40 @@
 {% block content %}
 <main class="navbar">
         <nav>
-            <ul> 
+        <ul> 
                 <li class="item"><a href="/">Movimientos</a></li>
                 <li class="item"><a href="/purchase">Compra</a></li>
                 <li class="item"><a>Status</a></li>
-            </ul>
+        </ul>
         </nav>
 {% block title %}STATUS{% endblock %}
+
 {% for mensaje in mensajes %}
-        <p>{{mensaje}}</p>
+        <p class="err-msg">
+                {{mensaje}}
+        </p>
 {% endfor %}
 <title>ESTADO DE LA INVERSIÓN</title>
 
 <div id="boton-plus">
         <button><a href="/"><i class="fas fa-plus"></i></a></button>
 <div>
-{{ form.invertido.label }}
-{{ form.invertido }}
-</div>
-<div>
-{{ form.valorActual.label }}
-{{ form.valorActual }}
-</div>
-        
+{% if interruptorError == False  %}
+        {{ form.invertido.label }}
+        {{ form.invertido (value=form.invertido.data) }}
+        </div>
+        <div>
+        {{ form.valorActual.label }}
+        {{ form.valorActual (value=form.valorActual.data) }}
+        </div>
+{% else %}
+        <div>
+        {{ form.invertido.label }}
+        {{ form.invertido (value='', disabled="disabled") }}
+        </div>
+        <div>
+        {{ form.valorActual.label }}
+        {{ form.valorActual(value='', disabled="disabled") }}
+        </div>
+{% endif %}        
 {% endblock %}

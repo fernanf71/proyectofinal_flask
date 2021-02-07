@@ -5,13 +5,12 @@
 
 {% block content %}
 
-<div>
-<main class="navbar">
+<div class="navbar">
     <nav>
         <ul> 
-            <li class="item"><a href="/">Movimientos</a></li>
-            <li class="item"><a href="/purchase">Compra</a></li>
-            <li class="item"><a href="/status">Status</a></li>
+            <li><a href="/">Movimientos</a></li>
+            <li>Compra</li>
+            <li><a href="/status">Status</a></li>
         </ul>
     </nav>
 </div>
@@ -24,6 +23,7 @@
             {{mensaje}}
         </p>
     {% endfor %}
+    <h1>Compra CRYPTOS</h1>
     <table>
     <div>
         <tr>
@@ -67,13 +67,10 @@
     </table>
     </div>    
     <div>
-        {{ form.aceptar (disabled="disabled", class="aceptar")}}
+        {{ form.aceptar (disabled="disabled")}}
     </div>
     <div>
-        {{ form.cancelar (class = "Cancelar") }}
-    </div>
-    <div>
-        {{ form.calc (class = "Calc") }}
+        {{ form.calc }}
     </div>
     </table>
 {% else %}
@@ -119,10 +116,7 @@
         {{ form.aceptar (class = "Aceptar") }}
     </div>
     <div>
-        {{ form.cancelar (class = "Cancelar") }}
-    </div>
-    <div>
-        {{ form.calc (class = "Calc") }}
+        {{ form.calc (class="calculadora" ) }}
     </div>
     </table>
 {% endif %}

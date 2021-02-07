@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
     <script src="https://kit.fontawesome.com/fca0ca4fca.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    
-    <title>{% block title %}{% endblock %}</title>  <!---esta parte quiero que sea dinámica y en función de la página que estoy, muestre el título-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/pico.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">    
+
 </head>
 <body>
-
+    <div>
     <header>
-        <p>myCRYPTO</p>
-    </header>
-    <section>  <!---section es la parte que va a ir cambiando en mi aplicación-->
-        {% block content %}{% endblock %}
-    </section>
+        <div class="logo">
+            <img src="/static/images/logo.png">
+        </div>
 
+        <div>
+        <title>{% block title %}{% endblock %}</title>  <!---esta parte quiero que sea dinámica y en función de la página que estoy, muestre el título-->
+        </div>
+    </header>
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
     <footer>
-        &copy; 2021 - Todos los derechos reservados  <!---buscar en internet 'HTML entities' (https://dev.w3.org/html5/html-author/charref)-->
+    <p>&copy; 2021 - Todos los derechos reservados</p>  <!---buscar en internet 'HTML entities' (https://dev.w3.org/html5/html-author/charref)-->
     </footer>
-    
-    
 </body>
 </html>

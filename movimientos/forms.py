@@ -17,7 +17,7 @@ def disponibilidadMonedas(form, field):
 
 def mismaMoneda(form, field):
     if form.desde.data == field.data:
-        raise ValidationError('No puede realizar la operación con la misma moneda. Elija moneda distinta')
+        raise ValidationError('No puede realizar la operación con las mismas monedas. Elija monedas distintas')
 
 
 class MovimientosForm(FlaskForm):
@@ -28,8 +28,7 @@ class MovimientosForm(FlaskForm):
     pu = FloatField('Precio unitario')
 
     aceptar = SubmitField('Aceptar')
-    cancelar = SubmitField('Cancelar')
-    calc = SubmitField('Calcular')
+    calc = SubmitField("Calcular")
     volver = SubmitField('Volver')
 
 class Status(FlaskForm):

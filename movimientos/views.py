@@ -14,7 +14,7 @@ def Movimientos():
         movimientos = consulta('SELECT fecha, hora, desde, q1, hacia, q2, pu FROM movimientos;')
     except Exception as e:
         print("**ERROR**: Acceso a la base de datos -movimientos: {} {}". format(type(e).__name__, e))
-        mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
+        mensajes.append('Error en acceso a base de datos. Consulte con el administrador.')
 
         return render_template('listaMovimientos.html', mensajes=mensajes)
     
@@ -37,7 +37,7 @@ def compra():
         saldoMonedas = valorActual()
     except Exception as e:
         print("**ERROR**: Acceso a la base de datos -compra cryptos: {} {}". format(type(e).__name__, e))
-        mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
+        mensajes.append('Error en acceso a base de datos. Consulte con el administrador.')
         return render_template('compra.html', form=form, interruptor=False, mensajes=mensajes)
         
     if request.method == 'POST' and form.validate():
@@ -51,7 +51,7 @@ def compra():
 
             except Exception as e:
                 print("**ERROR**: Error llamada API -compra_API: {} {}". format(type(e).__name__, e))
-                mensajes.append('Error en acceso a API. Consulte con el administrador')
+                mensajes.append('Error en acceso a API. Consulte con el administrador.')
                 return render_template('compra.html', form=form, interruptor=False, mensajes=mensajes)
 
             return render_template('compra.html', form=form, interruptor=True, mensajes=[])
@@ -73,7 +73,7 @@ def compra():
                 return redirect(url_for('Movimientos', form=form))  # tambien se puede poner: return redirect('/')
             except Exception as e:
                 print("**ERROR**: Acceso a la base de datos -insert: {} {}". format(type(e).__name__, e))
-                mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
+                mensajes.append('Error en acceso a base de datos. Consulte con el administrador.')
                 return render_template('compra.html', form=form, mensajes=mensajes)
     
     return render_template('compra.html', form=form, interruptor=interruptor, mensajes=mensajes)
@@ -87,7 +87,7 @@ def status():
         saldoMonedas = valorActual()
     except Exception as e:
         print("**ERROR**: Acceso a la base de datos -insert: {} {}". format(type(e).__name__, e))
-        mensajes.append('Error en acceso a base de datos. Consulte con el administrador')
+        mensajes.append('Error en acceso a base de datos. Consulte con el administrador.')
         return render_template('status.html', form=form, mensajes=mensajes)
 
     valorActualEur = 0
@@ -99,7 +99,7 @@ def status():
 
         except Exception as e:
                 print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
-                mensajes.append('Error en acceso a la API. Consulte con el administrador')
+                mensajes.append('Error en acceso a la API. Consulte con el administrador.')
                 return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
         try:    
             saldoEur =saldoEuros()
@@ -107,7 +107,7 @@ def status():
             
         except Exception as e:
                 print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
-                mensajes.append('Error en acceso a la API. Consulte con el administrador')
+                mensajes.append('Error en acceso a la API. Consulte con el administrador.')
                 return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
 
     form.invertido.data = totalEuros

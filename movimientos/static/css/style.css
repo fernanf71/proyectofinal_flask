@@ -1,0 +1,99 @@
+body > main, body > footer {
+    padding: 16px;
+}
+
+header{
+    padding-top:30px !important;
+    padding-bottom: 20px !important;
+    display: flex;
+    justify-content: center;
+}
+.logo{
+    width: 140px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+    --background:              #FFF;
+    --text:                    #000000;
+    --h1:                      #1b2832;
+    --h2:                      #2c3d49;
+    --h3:                      #415462;
+    --h4:                      #596b78;
+    --h5:                      #73828c;
+    --h6:                      #8a99a3;
+    --primary:                 #FF9900;
+    --primary-border:          var(--primary);
+    --primary-hover:           #000000;
+    --primary-hover-border:    var(--primary-hover);
+    --primary-focus:           rgba(16, 149, 193, 0.125);
+    --primary-inverse:         #FFF;
+    --secondary:               #73828c;
+    --secondary-border:        var(--secondary);
+    --secondary-hover:         #415462;
+    --secondary-hover-border:  var(--secondary-hover);
+    --secondary-focus:         rgba(115, 130, 140, 0.125);
+    --secondary-inverse:       #FFF;
+    --contrast:                #2c3d49;
+    --contrast-border:         var(--contrast);
+    --contrast-hover:          #0d1419;
+    --contrast-hover-border:   var(--contrast-hover);
+    --contrast-focus:          rgba(115, 130, 140, 0.125);
+    --contrast-inverse:        #FFF;
+    --input-background:        #FFF;
+    --input-border:            #c8d1d8;
+    --input-hover-background:  var(--input-background);
+    --input-hover-border:      var(--primary);
+    --input-focus:             var(--primary-focus);
+    --input-inverse:           var(--primary-inverse);
+    --button-shadow:           0 0 0 0 rgba(0, 0, 0, 0);
+    --button-hover-shadow:     0 0 0 0 rgba(0, 0, 0, 0);
+    --valid:                   #288a6a;
+    --invalid:                 #b94646;
+    --mark:                    rgba(255, 223, 128, 0.33);
+    --mark-text:               #2c3d49;
+    --muted-text:              #7e8d98;
+    --muted-background:        #edf0f3;
+    --muted-border:            #edf0f3;
+    --card-background:         #FFF;
+    --card-sections:           #f3f5f7;
+    --card-shadow:             0 0.125rem 1rem rgba(27, 40, 50, 0.04), 0 0.125rem 2rem rgba(27, 40, 50, 0.08), 0 0 0 0.0625rem rgba(27, 40, 50, 0.024);
+    --code-background:         #f3f5f7;
+    --code-inlined:            #edf0f3;
+    --code-color-1:            #73828c;
+    --code-color-2:            #b34d80;
+    --code-color-3:            #3d888f;
+    --code-color-4:            #998866;
+    --code-color-5:            #96a4ae;
+    --table-border:            rgba(237, 240, 243, 0.75);
+    --table-stripping:         rgba(115, 130, 140, 0.075);
+}
+
+a[role="button"] {
+    padding: var(--button-spacing-vertical) var(--button-spacing-horizontal);
+    border: var(--button-border-width) solid var(--primary-border);
+    border-radius: var(--button-round);
+    outline: none;
+    background-color: var(--primary);
+    box-shadow: var(--button-shadow);
+    color: var(--primary-inverse);
+    font-size: 1rem;
+    font-weight: var(--buttons-weight);
+    line-height: var(--line-height);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.err-msg {
+    color: var(--invalid);
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0
+}

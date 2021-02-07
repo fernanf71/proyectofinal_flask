@@ -3,21 +3,23 @@
 {% block title %}Movimientos{% endblock %}
 
 {% block content %}
-<div>
+<div class="navbar">
 <nav>
         <ul> 
-                <li class="item"><a>Movimientos</a></li>
+                <li class="item">Movimientos</li>
                 <li class="item"><a href="/purchase">Compra</a></li>
                 <li class="item"><a href="/status">Status</a></li>
         </ul>
 </nav>
 </div>
 {% for mensaje in mensajes %}
-        <p>{{mensaje}}</p>
+        <p class="err-msg">
+                {{mensaje}}
+        </p>        
 {% endfor %}
 <h1>Movimientos</h1>
         <div id="boton-plus">
-                <button><a href="/purchase"><i class="fas fa-plus"></i></a></button>
+                <a role="button" href="/purchase">Nueva compra</a>
         </div>
         {% if datos|length > 0 %}
         <table>
@@ -37,7 +39,7 @@
                 <td>{{ registro ['desde'] }}</td>
                 <td>{{ registro ['q1'] }}</td>
                 <td>{{ registro ['hacia'] }}</td>
-                <td>{{ registro ['q2'] }}</td>
+                <td>{{ registro ['q2'] | round(8, 'floor') }}</td>
                 <td>{{ registro ['pu'] }}</td>
         </tr>
         {% endfor %}        

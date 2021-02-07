@@ -1,43 +1,56 @@
 {% extends 'base.html' %}
 
+{% block title %}STATUS{% endblock %}
 
 {% block content %}
-<main class="navbar">
+<div class="navbar">
         <nav>
         <ul> 
                 <li class="item"><a href="/">Movimientos</a></li>
                 <li class="item"><a href="/purchase">Compra</a></li>
-                <li class="item"><a>Status</a></li>
+                <li class="item">Status</li>
         </ul>
         </nav>
-{% block title %}STATUS{% endblock %}
-
+</div>
 {% for mensaje in mensajes %}
         <p class="err-msg">
                 {{mensaje}}
         </p>
 {% endfor %}
-<title>ESTADO DE LA INVERSIÓN</title>
+<h1>ESTADO DE LA INVERSIÓN (EUR)</h1>
 
-<div id="boton-plus">
-        <button><a href="/"><i class="fas fa-plus"></i></a></button>
-<div>
+<table>
 {% if interruptorError == False  %}
-        {{ form.invertido.label }}
-        {{ form.invertido (value=form.invertido.data) }}
+        <div>
+        <tr>
+                {{ form.invertido.label }}
+                {{ form.invertido (value=form.invertido.data) }}
+        </tr>
         </div>
         <div>
-        {{ form.valorActual.label }}
-        {{ form.valorActual (value=form.valorActual.data) }}
+        <tr>
+                {{ form.valorActual.label }}
+                {{ form.valorActual (value=form.valorActual.data | round(8, 'floor')) }}
+        </tr>
         </div>
+</table>
 {% else %}
+<table>        
         <div>
-        {{ form.invertido.label }}
-        {{ form.invertido (value='', disabled="disabled") }}
+        <tr>
+                {{ form.invertido.label }}
+                {{ form.invertido (value='', disabled="disabled") }}
+        </tr>
         </div>
         <div>
-        {{ form.valorActual.label }}
-        {{ form.valorActual(value='', disabled="disabled") }}
+        <tr>
+                {{ form.valorActual.label }}
+                {{ form.valorActual(value='', disabled="disabled") }}
+        </tr>
         </div>
-{% endif %}        
+{% endif %}
+</table>
+<div>
+      <a role="button" href="/">Volver</a>
+</div>        
 {% endblock %}

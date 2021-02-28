@@ -9,3 +9,13 @@ CREATE TABLE "movimientos" (
 	"pu"	REAL NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 )
+
+CREATE TABLE "usuarios" (
+	"id"	INTEGER NOT NULL,
+	"nombre"	TEXT NOT NULL,
+	"clave"	TEXT NOT NULL,
+	"correo"	TEXT NOT NULL,
+	"hora"	TEXT NOT NULL,
+	"fecha"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)

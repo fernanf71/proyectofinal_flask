@@ -1,13 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
+from wtforms.validators import DataRequired, Length, ValidationError, NumberRange, Email
 from datetime import date
 from movimientos.balance import valorActual
-
-
+from movimientos.usuarios import email
 
 listaMonedas = ['EUR', 'BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'BNB', 'USDT', 'EOS', 'BSV', 'XLM', 'ADA', 'TRX']
-
 
 def disponibilidadMonedas(form, field):
     disponibilidades = valorActual()
@@ -19,6 +17,11 @@ def mismaMoneda(form, field):
     if form.desde.data == field.data:
         raise ValidationError('No puede realizar la operación con las mismas monedas. Elija monedas distintas')
 
+def mismoEmail(form, field):
+    correoElectronico = email()
+    print('***CORREO***', correoElectronico)
+    if field.data in correoElectronico:
+            raise ValidationError('La dirección de correo eléctronico ya ha sido registrada')
 
 class MovimientosForm(FlaskForm):
     desde = SelectField('From', choices=listaMonedas)
@@ -32,6 +35,13 @@ class MovimientosForm(FlaskForm):
     volver = SubmitField('Volver')
 
 class Status(FlaskForm):
-    invertido = FloatField('Invertido')
+    valorEurosActualCryptos = FloatField('Valor euros actual cryptos')
+    eurosAtrapadosInversion = FloatField('Euros atrapados en inversión')
     valorActual = FloatField('Valor actual')
     volver = SubmitField('Volver')
+
+class Registro(FlaskForm):
+    name = StringField('Nombre', validators=[DataRequired(), Length(max=64)])
+    password = PasswordField('Password', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email(), mismoEmail ])
+    registrar = SubmitField('Registrar')

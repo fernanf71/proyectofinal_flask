@@ -9,6 +9,7 @@
                 <li class="item"><a href="/">Movimientos</a></li>
                 <li class="item"><a href="/purchase">Compra</a></li>
                 <li class="item">Status</li>
+                <li class="item"><a href="/registro">Registro</a></li>
         </ul>
         </nav>
 </div>
@@ -17,14 +18,18 @@
                 {{mensaje}}
         </p>
 {% endfor %}
-<h1>ESTADO DE LA INVERSIÓN (EUR)</h1>
-
+<h1>ESTADO DE LA INVERSIÓN</h1>
 <table>
 {% if interruptorError == False  %}
         <div>
+        <tr>        
+                {{ form.valorEurosActualCryptos.label }}
+                {{ form.valorEurosActualCryptos (value=form.valorEurosActualCryptos.data | round(8, 'floor')) }}
+        </tr>
+        
         <tr>
-                {{ form.invertido.label }}
-                {{ form.invertido (value=form.invertido.data) }}
+                {{ form.eurosAtrapadosInversion.label }}
+                {{ form.eurosAtrapadosInversion (value=form.eurosAtrapadosInversion.data | round(8, 'floor')) }}
         </tr>
         </div>
         <div>
@@ -38,8 +43,14 @@
 <table>        
         <div>
         <tr>
-                {{ form.invertido.label }}
-                {{ form.invertido (value='', disabled="disabled") }}
+                {{ form.valorEurosActualCryptos.label }}
+                {{ form.valorEurosActualCryptos (value='', disabled="disabled") }}
+
+        </tr>
+
+        <tr>
+                {{ form.eurosAtrapadosInversion.label }}
+                {{ form.eurosAtrapadosInversion (value='', disabled="disabled") }}
         </tr>
         </div>
         <div>

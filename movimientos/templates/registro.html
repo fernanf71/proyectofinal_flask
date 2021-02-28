@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}REGISTRO USUARIO{% endblock %}
+
+{% block content %}
+<div class="navbar">
+        <nav>
+        <ul> 
+                <li class="item"><a href="/">Movimientos</a></li>
+                <li class="item"><a href="/purchase">Compra</a></li>
+                <li class="item"><a href="/status">Status</a></li>
+                <li class="item">Registro</li>
+        </ul>
+        </nav>
+</div>
+
+<h1>REGISTRO DE USUARIO</h1>
+<div><p class="doing">UNDER CONSTRUCTION</p></div>
+<form action="registro" method='post'>
+{{ form.hidden_tag() }}
+
+{% if interruptorRegistro == False  %}
+<table>
+        <div>
+        <tr>
+        {{ form.name.label }}
+        {{ form.name (value=form.name.data) }}
+        </tr>
+        </div>
+        <div>
+        <tr>
+        {{ form.email.label }}
+        {{ form.email (value=form.email.data) }}
+        </tr>
+        </div>
+        <div>
+        <tr>
+        {{ form.password.label }}
+        {{ form.password (value=form.password.data) }}
+        </tr>
+        </div>
+</table>
+<div>
+{{ form.registrar (class = "Registrar") }}
+</div>        
+<div>
+        <a role="button" href="/">Volver</a>
+</div>
+{% else  %}
+<table>
+        <div>
+        <tr>
+        {{ form.name.label }}
+        {{ form.name (placeholder='nombre') }}
+        </tr>
+        </div>
+        <div>
+        <tr>
+        {{ form.password.label }}
+        {{ form.password (placeholder='contraseña') }}
+        </tr>
+        </div>
+        <div>
+        <tr>
+        {{ form.email.label }}
+        {{ form.email (placeholder='correo electrónico') }}
+        </tr>
+        </div>
+</table>
+<div>
+{{ form.registrar (class = "Registrar") }}
+</div>        
+<div>
+        <a role="button" href="/">Volver</a>
+</div>
+{% endif %}
+</form>      
+{% endblock %}

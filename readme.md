@@ -47,6 +47,10 @@ La base de datos deberá crearse a través de la siguiente ruta:
         
         movimientos\data\basededatos.db
 
+Adicionalmente, hay una basa de datos de registro de usuarios cuya estructura se encuentra en el fichero "initial.sql". La BBDD se ubicará en la siguiente ruta:
+
+        movimientos\data\usuarios.db
+
 ## Fichero de configuración
 
 Se deberá renombrar el ficher "config_template.py" por "config.py" e incluir la siguiente información:
@@ -54,6 +58,7 @@ Se deberá renombrar el ficher "config_template.py" por "config.py" e incluir la
 SECRET_KEY='Ponga aquí su clave para CSRF'
 DBFILE = 'Ponga aquí la ruta a la base de datos'
 API_KEY='Ponga aquí su API KEY de Coinmarket'
+DBFILEUSERS='ruta base de datos usuarios'
 
 ## Ejecución
 

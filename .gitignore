@@ -5,3 +5,4 @@ __pycache__/
 movimientos/__pycache__/
 movimientos/data/basededatos.db
 config.py
+movimientos/data/usuarios.db

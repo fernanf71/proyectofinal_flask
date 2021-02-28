@@ -33,9 +33,10 @@ def balance(listaMoneda):
         if dato['hacia'] == listaMoneda:
             q2 += float(dato['q2'])
         elif dato['desde'] == listaMoneda:
-            q1 -= float(dato['q1'])
+            q1 += float(dato['q1'])
     balance = q2 - q1
     return balance
+    print('***PRUEBA BALANCE***',balance)
 
 def seleccionDesde():
     listaMonedas = ['BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'BNB', 'USDT', 'EOS', 'BSV', 'XLM', 'ADA', 'TRX']
@@ -76,8 +77,3 @@ def valorActual():
         if balance(moneda) > 0:
             monedasSaldo[moneda] = balance(moneda)
     return monedasSaldo
-
-
-
-
-

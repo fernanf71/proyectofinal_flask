@@ -1,9 +1,10 @@
 from movimientos import app  # estoy importando el app del fichero __init__.py
-from movimientos.forms import MovimientosForm, Status
+from movimientos.forms import MovimientosForm, Status, Registro
 from flask import render_template, request, url_for, redirect
 from datetime import datetime
 from movimientos.api import*
 from movimientos.balance import*
+from movimientos.usuarios import*
 
 
 @app.route('/')
@@ -101,15 +102,45 @@ def status():
                 print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
                 mensajes.append('Error en acceso a la API. Consulte con el administrador.')
                 return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
-        try:    
-            saldoEur =saldoEuros()
-            totalEuros =eurosInvertidos()
-            
-        except Exception as e:
-                print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
-                mensajes.append('Error en acceso a la API. Consulte con el administrador.')
-                return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
+    try:    
+        saldoEur =saldoEuros()
+        
+    except Exception as e:
+            print("**ERROR**: Acceso a API -insert: {} {}". format(type(e).__name__, e))
+            mensajes.append('Error en acceso a la API. Consulte con el administrador.')
+            return render_template('status.html', mensajes=mensajes, form=form, interruptorError=True)
 
-    form.invertido.data = totalEuros
-    form.valorActual.data = totalEuros + saldoEur + valorActualEur
+    form.valorEurosActualCryptos.data = valorActualEur
+    form.eurosAtrapadosInversion.data = saldoEur
+    form.valorActual.data = valorActualEur + saldoEur
     return render_template('status.html', mensajes=mensajes, form=form, interruptorError=interruptorError)
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    interruptorRegistro = False
+    ahora = datetime.now()
+    dia = ahora.date()
+    hora = ahora.strftime('%H:%M:%S')
+
+    form = Registro()
+    '''
+    conn = sqlite3.connect('movimientos/data/usuarios.db')
+    c = conn.cursor()
+    '''
+    if request.method == 'POST':
+        
+        if form.registrar.data == True:
+            
+            consultaUsuarios('INSERT INTO usuarios (fecha, hora, nombre, correo, clave) VALUES ( ?, ?, ?, ?, ?);',
+            
+                    (
+                        dia,
+                        hora,
+                        form.name.data,
+                        form.email.data,
+                        form.password.data
+                    )
+            )
+        return redirect(url_for('Movimientos'))
+
+    return render_template('registro.html', form=form, interruptorRegistro=True)
